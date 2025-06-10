@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Share Your Story</title>
+  <link href="../css/alumnidashboard.css" rel="stylesheet">
+</head>
+<body>
+    <div class="form-container">
+      <h2>Share Your Alumni Story</h2>
+      <form id="story-form">
+        <div class="form-group">
+          <label for="name">Name:</label>
+          <input type="text" id="name" required>
+        </div>
+        <div class="form-group">
+          <label for="graduation-year">Graduation Year:</label>
+          <input type="number" id="graduation-year" required>
+        </div>
+        <div class="form-group">
+          <label for="title">Story Title:</label>
+          <input type="text" id="title" required>
+        </div>
+        <div class="form-group">
+          <label for="story">Your Story:</label>
+          <textarea id="story" rows="5" required></textarea>
+        </div>
+        <div class= "sum-container">
+          <button type="submit" class="submit-btn">Submit</button>
+          <a href="alumniDashboard.html" class= "dash">Dashboard</a>
+        </div>
+      </form>
+      </div>
+
+  <script>
+    document.getElementById('story-form').addEventListener('submit', async function(e) {
+      e.preventDefault();
+      
+      const storyData = {
+        name: document.getElementById('name').value,
+        graduationYear: document.getElementById('graduation-year').value,
+        title: document.getElementById('title').value,
+        story: document.getElementById('story').value,
+        createdAt: new Date()
+      };
+
+      try {
+        const response = await fetch('/api/yearbook/stories', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          credentials: 'include',
+          body: JSON.stringify(storyData)
+        });
+
+        const data = await response.json();
+        if (response.ok) {
+          alert('Story submitted successfully!');
+          document.getElementById('story-form').reset();
+        } else {
+          throw new Error(data.message || 'Failed to submit story');
+        }
+        } catch (error) {
+          alert(error.message);
+        }
+    });
+  </script>
+</body>
+</html>

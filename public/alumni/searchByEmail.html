@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Search by Email</title>
+  <link href="../css/alumnidashboard.css" rel="stylesheet">
+</head>
+<body>
+  <div class="header">
+    <img class="image" alt="Logo" src="../photos/logo.png">  
+    <h1>Alumni Profile </h1>
+    <a href="/logout" class="logout-btn" id="logout-btn">Logout</a>
+  </div>
+  <div class="rectangle">
+    <br><br><br>
+    <a href="/alumni/alumniDashboard.html" class="back-btn">Dashboard</a>
+  </div>
+  <div class="dashboard-search-container">
+      <h2>Search by Email</h2>
+        <div class="search-box">
+          <input type="text" id="search-input" placeholder="Enter email">
+          <button id="execute-search" class="execute-search">Search</button>
+        </div>
+    <div id="results-container">
+      <table id="results-table">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>Occupation</th>
+            <th>Company</th>
+            <th>Graduation Year</th>
+          </tr>
+        </thead>
+        <tbody id="results-body">
+          <!-- Results will be inserted here -->
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <script>
+    document.getElementById('execute-search').addEventListener('click', function() {
+      const email = document.getElementById('search-input').value.trim();
+      
+      if (!email) {
+        alert('Please enter an email');
+        return;
+      }
+      
+      fetch(`/api/alumni/search?email=${encodeURIComponent(email)}`, {
+        credentials: 'include'
+      })
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Search failed');
+        }
+        return response.json();
+      })
+      .then(data => {
+        const tbody = document.getElementById('results-body');
+        tbody.innerHTML = '';
+        
+        if (data.length === 0) {
+          tbody.innerHTML = '<tr><td colspan="6">No results found</td></tr>';
+          return;
+        }
+        
+        data.forEach(alumni => {
+          const row = document.createElement('tr');
+          row.innerHTML = `
+            <td>${alumni.name || 'N/A'}</td>
+            <td>${alumni.email || 'N/A'}</td>
+            <td>${alumni.phone || 'N/A'}</td>
+            <td>${alumni.occupation || 'N/A'}</td>
+            <td>${alumni.company || 'N/A'}</td>
+            <td>${alumni.graduationYear || 'N/A'}</td>
+          `;
+          tbody.appendChild(row);
+        });
+      })
+      .catch(error => {
+        console.error('Search error:', error);
+        alert('Search failed. Please try again.');
+      });
+    });
+  </script>
+</body>
+</html>

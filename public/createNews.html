@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Create News</title>
+  <link href="./css/admindashboard.css" rel="stylesheet">
+</head>
+<body>
+  <div class="header">
+    <img class="image" alt="Logo" src="../photos/logo.png">  
+    <h1>Admin Profile </h1>
+  </div>
+  <div class="rectangle">
+    <button id="message" class="message" onclick="window.location.href='./admin/adminDashboard.html'">Dashboard </button>
+  </div>
+  <div class="form-container">
+    <h2>Create News</h2>
+    <form id="news-form">
+      <div class="form-group">
+        <label for="title">Title:</label>
+        <input type="text" id="title" required>
+      </div>
+      <div class="form-group">
+        <label for="content">Content:</label>
+        <textarea id="content" rows="5" required></textarea>
+      </div>
+      <button type="submit" class="submit-btn">Submit</button>
+    </form>
+  </div> 
+  <script>
+    document.getElementById('news-form').addEventListener('submit', async function(e) {
+      e.preventDefault();
+      
+      const newsData = {
+        title: document.getElementById('title').value,
+        content: document.getElementById('content').value
+      };
+
+      try {
+        const token = localStorage.getItem('token');
+        const response = await fetch('/api/admin/news', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+          },
+          body: JSON.stringify(newsData)
+        });
+
+        const data = await response.json();
+        
+        if (response.ok) {
+          alert('News created successfully!');
+          document.getElementById('news-form').reset();
+        } else {
+          throw new Error(data.message || 'Failed to create news');
+        }
+        } catch (error) {
+          alert(error.message);
+        }
+
+    });
+  </script>
+</body>
+</html>

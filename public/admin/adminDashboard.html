@@ -1,0 +1,51 @@
+<!DOCTYPE html> 
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard</title>
+  <link href="../css/admindashboard.css" rel="stylesheet">
+</head>
+<body>
+  <div class="header">
+    <img class="image" alt="Logo" src="../photos/logo.png">  
+    <h1>Admin Profile </h1>
+    <button id="logout-btn" class="logout-btn">Logout</button>
+  </div>
+
+  <div class="rectangle">
+    <div class="action-buttons">
+      <br>
+      <button id="create-btn" class="create-btn">Create</button>
+      <div id="create-options" class="create-options" style="display: none;">
+        <a href="../createNews.html" class="create-option">News</a>
+        <a href="../createEvent.html" class="create-option">Event</a>
+      </div>
+      <button id="edit-btn" class="edit-btn" onclick="window.location.href='editAdmin.html'">Edit</button>
+      
+    </div>
+  </div>
+  <div class="container">
+    <table class="admin-table">
+      <tr>
+        <th><strong>Name: </strong></th>
+        <td></td>
+      </tr>
+      <tr>
+        <th><strong>Email: </strong></th>
+        <td></td>
+      </tr>
+      <tr>
+        <th><strong>Phone no: </strong></th>
+        <td></td>
+      </tr>
+    </table>
+  </div>
+  
+  <div class="approvals-section">
+    <h2 style="margin-left:-25%;">Pending Alumni Approvals</h2>
+    <div id="pending-approvals"></div> 
+  </div>
+  <script src="adminDashboard.js"></script>
+</body>
+</html>

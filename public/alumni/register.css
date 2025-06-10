@@ -1,0 +1,154 @@
+.hidden { display: none; }
+
+body {
+    font-family: Arial, sans-serif;
+    background: url('create.jpg') no-repeat center center fixed; /* Add your background image here */
+    background-size: cover; /* Ensure the background image covers the entire screen */
+    margin: 0;
+    padding: 0;
+    position: relative;
+}
+
+body::before {
+    content: '';
+    position: fixed; /* Fixed position to cover the entire screen */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.5); /* Adjust the color and transparency as needed */
+    z-index: -1; /* Ensure it's behind the content */
+}
+
+.container {
+    max-width: 500px;
+    margin: 50px auto;
+    background-color:#e3bec4;
+    border-radius:8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+}
+h1{
+    text-align: center;
+}
+h2
+{
+    text-align: center;
+    margin-bottom: 20px;
+    color:#b4afb3;
+    padding-top:5px;    
+    height: 40px;
+    border-radius:10px;
+    background-color: darkblue;
+}
+form {
+    display: flex;
+    flex-direction: column;
+}
+label {
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #555;
+} 
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+input[type="year"],
+input[type="password"] {
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+    font-size: 16px;
+}
+textarea {
+    padding: 10px;
+    margin-bottom: 20px; 
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+    font-size: 16px;
+    width: 100%;
+}
+.containerAlumni{
+    max-width: 500px;
+    margin: auto;
+    position: relative;
+    margin-top:70vh;
+    transform: translateY(-50%); 
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    z-index: 1;
+}
+form > div {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px;
+}
+.status-box {
+    margin: 20px 0;
+    padding: 10px;
+    border: 1px solid #ccc;
+    min-height: 50px;
+}
+.button-group {
+    margin-top: 20px;
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+}
+button {
+    padding: 10px 15px;
+    cursor: pointer;
+    text-decoration: none;
+}
+#uploadStatus {
+    margin-left: 10px;
+    font-style: italic;
+}
+.homepage-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+/* Upload Button Specific */
+#uploadBtn {
+    padding: 10px 15px;
+    cursor: pointer;
+    text-decoration: none;
+    border: 1px solid #ffffff;
+    background-color: lightgrey;
+    border-radius: 5px;
+    color: rgb(0, 0, 0);
+}
+
+/* Verify & Check Status Styling */
+#verifyBtn, #checkStatusBtn {
+    padding: 10px 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: green;
+    color: black;
+}
+
+#verifyBtn:hover, #checkStatusBtn:hover {
+    background-color: darkgreen;
+    color:white;
+}
+
+#homepageBtn {
+    text-decoration: none;    
+    color: white; 
+    background-color: darkblue;
+    padding: 10px 20px;
+    border-radius: 5px;
+    display: inline-block;
+}
+
+#homepageBtn:hover {
+    background-color: rgb(105, 105, 172);
+}

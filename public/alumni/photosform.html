@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Share Your Photo</title>
+  <link href="../css/alumnidashboard.css" rel="stylesheet">
+</head>
+<body>
+  <div class="form-container">
+    <h2>Share Your Alumni Photo</h2>
+    <form id="photo-form" enctype="multipart/form-data">
+      <div class="form-group">
+        <label for="name">Name:</label>
+        <input type="text" id="name" required>
+      </div>
+      <div class="form-group">
+        <label for="photo">Photo:</label>
+        <input type="file" id="photo" accept="image/*" required style="border: none;">
+      </div>
+      <div class="form-group">
+        <label for="batch">Year Taken:</label>
+        <input type="number" id="batch" required>
+      </div>
+      <div class="form-group">
+        <label for="description">Description (optional):</label>
+        <textarea id="description" rows="3"></textarea>
+      </div>
+      <div class= "sum-container">
+        <button type="submit" class="submit-btn">Submit</button>
+        <a href="alumniDashboard.html" class="dash">Dashboard</a>
+      </div>
+    </form>
+  </div>
+
+  <script>
+    document.getElementById('photo-form').addEventListener('submit', async function(e) {
+      e.preventDefault();
+      
+      const formData = new FormData();
+      formData.append('name', document.getElementById('name').value);
+      formData.append('photo', document.getElementById('photo').files[0]);
+      formData.append('batch', document.getElementById('batch').value);
+      formData.append('description', document.getElementById('description').value);
+      formData.append('createdAt', new Date());
+
+      try {
+        const response = await fetch('/api/yearbook/photos', {
+          method: 'POST',
+          credentials: 'include',
+          body: formData
+        });
+
+        const data = await response.json();
+        
+        if (response.ok) {
+          alert('Photo submitted successfully!');
+          document.getElementById('photo-form').reset();
+        } else {
+          throw new Error(data.message || 'Failed to submit photo');
+        }
+        } catch (error) {
+          alert(error.message);
+        }
+    });
+  </script>
+</body>
+</html>

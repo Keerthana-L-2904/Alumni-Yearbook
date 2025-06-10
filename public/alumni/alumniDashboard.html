@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Alumni Dashboard</title>
+  <link href="../css/alumnidashboard.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+  <div class="header">
+    <img class="image" alt="Logo" src="../photos/logo.png">  
+    <h1>Alumni Profile </h1>
+    <a href="/logout" class="logout-btn" id="logout-btn">Logout</a>
+  </div>
+  <div class="rectangle">
+    <div class="action-buttons">
+      <button id="create-btn" class="create-btn" >Create</button>
+        <div id="create-options" class="create-options" style="display: none;">
+          <a href="./storiesform.html" class="create-option">Alumni Stories</a>
+          <a href="./photosform.html" class="create-option">Photos</a>
+        </div>
+      <a href="./editAlumni.html" class="edit-btn" >Edit Profile</a>
+      <a href="./yearbook.html" class="yearbook-btn">Yearbook</a>
+      <button id="search-btn" class="search-btn">Search</button>
+        <div id="search-options" class="search-options" style="display: none;">
+          <a href="searchByPhone.html" class="search-option" data-type="phone">Search by Phone Number</a>
+          <a href="searchByYear.html" class="search-option" data-type="year">Search by Graduation Year</a>
+          <a href="searchByName.html" class="search-option" data-type="name">Search by Name</a>
+          <a href="searchByEmail.html" class="search-option" data-type="email">Search by Email</a>
+        </div>
+      </div>
+  </div>
+<div class="dashboard-container">
+    <h2>Welcome, <span id="alumni-name" class="loading">Loading...</span></h2> 
+    <div id="profile-fields" style="display: none;">
+      <div class="profile-field">
+        <span class="field-label">Email:</span>
+        <span id="alumni-email" class="field-value"></span>
+      </div>
+      <div class="profile-field">
+        <span class="field-label">Phone:</span>
+        <span id="alumni-phone" class="field-value"></span>
+      </div>
+      <div class="profile-field">
+        <span class="field-label">Occupation:</span>
+        <span id="alumni-occupation" class="field-value"></span>
+      </div>
+      <div class="profile-field">
+        <span class="field-label">Company:</span>
+        <span id="alumni-company" class="field-value"></span>
+      </div>
+      <div class="profile-field">
+        <span class="field-label">Graduation Year:</span>
+        <span id="alumni-graduationYear" class="field-value"></span>
+      </div>
+    </div>  
+  <div id="error-message" class="error-message" style="display: none;"></div>   
+</div>
+<script src="./alumniDashboard.js"></script>
+
+</body>
+</html>

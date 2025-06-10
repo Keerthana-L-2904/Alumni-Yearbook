@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Profile</title>
+    <link href="../css/edit.css" rel="stylesheet">
+</head>
+<body>
+  <div class="header">
+    <img class="image" alt="Logo" src="../photos/logo.png">  
+    <h1>Admin Profile </h1>
+  </div>
+
+  <div class="rectangle">
+    <br><br><br>
+    <a href="adminDashboard.html" class="back-btn">Dashboard</a>
+  </div>
+  <div class="dashboard-container">
+    <h2>Edit Admin Profile</h2>
+    <form id="editProfileForm" style="margin-left:150px;">
+        <table>
+            <tr>
+                <th><strong>Name</strong></th>
+                <td><input type="text" id="name" name="name" value=""></td>
+            </tr>
+            <tr>
+                <th><strong>Email</strong></th>
+                <td><input type="email" id="email" name="email" value=""></td>
+            </tr>
+            <tr>
+                <th><strong>Phone no</strong></th>
+                <td><input type="text" id="phone" name="phone" value=""></td>
+            </tr>
+            <tr>
+                <th><strong>Password</strong></th>
+                <td><input type="password" id="password" name="password" placeholder="Leave blank to keep current"></td>
+            </tr>
+        </table>
+
+        <div class="edit-profile-button">
+            <button type="submit" class="submit-button">Save Details</button>
+        </div>
+    </form>
+</div>
+
+    <script>
+        // Fetch current profile data when page loads
+        document.addEventListener('DOMContentLoaded', async () => {
+            try {
+                const response = await fetch('/api/admin/profile', {
+                    headers: {
+                        'Authorization': `Bearer ${localStorage.getItem('token')}`
+                    }
+                });
+                
+                if (!response.ok) {
+                    throw new Error('Failed to fetch profile');
+                }
+                
+                const data = await response.json();
+                
+                // Populate form fields
+                document.getElementById('name').value = data.name || '';
+                document.getElementById('email').value = data.email || '';
+                document.getElementById('phone').value = data.phone || '';
+                
+            } catch (error) {
+                console.error('Error:', error);
+                alert('Failed to load profile data');
+            }
+        });
+
+        // Handle form submission
+        document.getElementById('editProfileForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const formData = {
+                name: document.getElementById('name').value,
+                email: document.getElementById('email').value,
+                phone: document.getElementById('phone').value,
+                password: document.getElementById('password').value
+            };
+            
+            try {
+                const response = await fetch('/api/admin/profile', {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${localStorage.getItem('token')}`
+                    },
+                    body: JSON.stringify(formData)
+                });
+                
+                const result = await response.json();
+                
+                if (!response.ok) {
+                    throw new Error(result.message || 'Failed to update profile');
+                }
+                
+                alert('Profile updated successfully');
+                // Optionally redirect or update UI
+                
+            } catch (error) {
+                console.error('Error:', error);
+                alert(error.message);
+            }
+        });
+    </script>
+</body>
+</html>

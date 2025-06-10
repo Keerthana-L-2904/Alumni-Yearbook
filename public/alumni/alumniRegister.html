@@ -1,0 +1,59 @@
+<!-- alumni-register.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alumni Registration</title>
+    <link href="./register.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+  <div class="containerAlumni">
+
+    <h1>Alumni Registration</h1>
+    <form id="alumniRegistrationForm">
+        <div>
+            <label for="name">Full Name:</label>
+            <input type="text" id="name" name="name" required>
+        </div>
+        <div>
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+        </div>
+        <div>
+            <label for="phone">Phone:</label>
+            <input type="tel" id="phone" name="phone" required>
+        </div>
+        <div>
+            <label for="occupation">Occupation:</label>
+            <input type="text" id="occupation" name="occupation" required>
+        </div>
+        <div>
+            <label for="company">Company:</label>
+            <input type="text" id="company" name="company" required>
+        </div>
+        <div>
+            <label for="graduationYear">Graduation Year:</label>
+            <input type="text" id="graduationYear" name="graduationYear" required>
+        </div>
+        <div>
+            <button type="button" id="uploadBtn">Upload College ID</button>
+            <span id="uploadStatus">No file selected</span>
+            <input type="file" id="collegeId" accept="image/*" style="display: none;">
+        </div>   
+    </form>
+    <div class="button-group">
+        <button type="button" id="verifyBtn">Verify</button>
+        <button type="button" id="checkStatusBtn">Check Status</button>
+    </div>
+     <div class="status-box" id="statusDisplay">
+        <!-- Status messages will appear here -->
+    </div>
+    <div class="homepage-container">
+        <a href="../index.html" id="homepageBtn">Homepage</a>
+    </div>
+</div>
+    
+    <script src="alumniRegister.js"></script>
+</body>
+</html>

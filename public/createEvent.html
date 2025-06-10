@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Create Event</title>
+  <link href="./css/admindashboard.css" rel="stylesheet">
+</head>
+<body>
+  <div class="header">
+    <img class="image" alt="Logo" src="../photos/logo.png">  
+    <h1>Admin Profile </h1>
+  </div>
+  <div class="rectangle">
+    <button id="message" class="message" onclick="window.location.href='./admin/adminDashboard.html'">Dashboard </button>
+  </div>
+  <div class="form-container">
+    <h2>Create Event</h2>
+    <form id="event-form">
+      <div class="form-group">
+        <label for="title">Title:</label>
+        <input type="text" id="title" required>
+      </div>
+      <div class="form-group">
+        <label for="content">Content:</label>
+        <textarea id="content" rows="5" required></textarea>
+      </div>
+      <div class="form-group">
+        <label for="event-date">Event Date:</label>
+        <input type="datetime-local" id="event-date" required>
+      </div>
+      <button type="submit" class="submit-btn">Submit</button>
+    </form>
+  </div> 
+  <script>
+    document.getElementById('event-form').addEventListener('submit', async function(e) {
+      e.preventDefault();
+      
+      const eventData = {
+        title: document.getElementById('title').value,
+        content: document.getElementById('content').value,
+        eventDate: document.getElementById('event-date').value
+      };
+
+      try {
+        const token = localStorage.getItem('token');
+        const response = await fetch('/api/admin/events', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+          },
+          body: JSON.stringify(eventData)
+        });
+
+        const data = await response.json();
+        
+        if (response.ok) {
+          alert('Event created successfully!');
+          document.getElementById('event-form').reset();
+        } else {
+          throw new Error(data.message || 'Failed to create event');
+        }
+        } catch (error) {
+          alert(error.message);
+        }
+    });
+  </script>
+</body>
+</html>

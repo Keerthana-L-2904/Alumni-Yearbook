@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ALUMNI YEARBOOK</title>
+    <link rel="stylesheet" href="./css/main.css">
+</head>
+<body>
+   <div class="header">
+      <img class="image" alt="Logo" src="./photos/logo.png">  
+        <div class="login"> 
+        <ul class="sub-btn"> 
+            <li class="drop">
+                <a href="#">Sign Up</a>
+                <ul class="dropdown-box">
+                    <li><a href="admin/adminRegister.html">Admin</a></li>
+                    <li><a href="alumni/alumniRegister.html">Alumni</a></li>
+                </ul>
+            </li>
+            <li class="drop">
+                <a href="#">Login</a>
+                <ul class="dropdown-box">
+                    <li><a href="admin/adminLogin.html">Admin</a></li>
+                    <li><a href="/auth/google/alumni">Alumni</a></li>
+                </ul>
+            </li>
+        </ul>
+      </div>
+<div id="error-message" class="error-message"></div>
+   </div>
+    <div class="body">
+        <div class="rectangle">
+            <ul class="topnav">         
+                <li><a href="#">Donate</a>
+                    <div class="dropdown-content">
+                        <img src="./photos/qr.png" alt="QR Code" style="width: 100px; height: 100px;">
+                    </div>
+                </li>
+                <li><a href="https://www.instagram.com/aak_alumni_yearbook?utm_source=qr&igsh=MTFsbXRiOTQ5cjBsNg==">Memories</a>
+                    <div class="dropdown-insta">
+                        <img src="./photos/insta.jpg" alt="insta Code" style="width: 100px; height: 100px;">
+                    </div>
+                </li>
+                <li>
+                    <a href="#">Latest News</a>
+                    <div class="dropdown-latest-content" id="latest-news-content"></div>
+                </li>
+                <li>
+                    <a href="#">Upcoming Events</a>
+                    <div class="dropdown-latest-content" id="upcoming-events-content"></div>
+                </li>
+                <li class="contact">
+                    <h3>Contact Details</h3>
+                    <address>
+                        <span class="contact-icon">☎️</span> 04841 23456<br>
+                         <div><span class="contact-icon">✉️</span><span class="email-text">almamater@gmail.com</span></div>
+                    </address>
+                </li>
+            </ul>
+        </div>
+        <div class="slideshow-container">
+            <div class="mySlides fade">
+                <img src="./photos/image1.png" alt="">
+            </div>
+            <div class="mySlides fade">
+                <img src="./photos/image2.jpg" alt="">
+            </div>
+            <div class="mySlides fade">
+                <img src="./photos/image3.png" alt="">
+            </div>
+            <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+            <a class="next" onclick="plusSlides(1)">&#10095;</a>
+
+            <div style="text-align:center">
+                <span class="dot"></span>
+                <span class="dot"></span>
+                <span class="dot"></span>
+            </div>
+        </div>
+    </div>    
+    <div class="caption">
+        <h1>AlmaLink</h1>
+    </div>
+    <script src="main.js"></script>
+</body>
+</html>

@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Profile</title>
+    <link href="../css/edit.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+<body>
+  <div class="header">
+    <img class="image" alt="Logo" src="../photos/logo.png">  
+    <h1>Alumni Profile </h1>
+    <a href="/logout" class="logout-btn" id="logout-btn">Logout</a>
+  </div>
+  <div class="rectangle">
+    <br><br><br>
+    <a href="alumniDashboard.html" class="back-btn">Dashboard</a>
+  </div>
+  <div class="dashboard-container">
+    <h2 style="margin-left:100px;">Edit Alumni Profile</h2>
+    <form id="profileForm" style="margin-left:150px;">
+        <table>
+            <tr>
+                <th><strong>Name</strong></th>
+                <td><input type="text" id="name" required></td>
+            </tr>
+            <tr>
+                <th><strong>Email</strong></th>
+                <td><span id="email" class="read-only"></span></td>
+            </tr>
+            <tr>
+                <th><strong>Phone no</strong></th>
+                <td><input type="text" id="phone"></td>
+            </tr>
+            <tr>
+                <th><strong>Occupation</strong></th>
+                <td><input type="text" id="occupation"></td>
+            </tr>
+            <tr>
+                <th><strong>Company</strong></th>
+                <td><input type="text" id="company"></td>
+            </tr>
+            <tr>
+                <th><strong>Graduation Year</strong></th>
+                <td><input type="text" id="graduationYear"></td>
+            </tr>
+        </table>
+        <div class="edit-profile-button">
+            <button type="submit" class="submit-button">Save Details</button>
+        </div>
+    </form>
+  </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+    try {
+        const response = await fetch('/api/alumni/me', {
+            credentials: 'include' 
+        });
+        
+        if (response.status === 401) {
+            window.location.href = '/alumniLogin.html';
+            return;
+        }
+        
+        if (!response.ok) {
+            throw new Error('Failed to fetch alumni data');
+        }
+        
+        const alumni = await response.json();
+        
+        // Populate form fields
+        document.getElementById('name').value = alumni.name || '';
+        document.getElementById('email').textContent = alumni.email || '';
+        document.getElementById('phone').value = alumni.phone || '';
+        document.getElementById('occupation').value = alumni.occupation || '';
+        document.getElementById('company').value = alumni.company || '';
+        document.getElementById('graduationYear').value = alumni.graduationYear || '';
+    } catch (error) {
+        console.error('Error fetching alumni data:', error);
+        alert('Failed to load profile data. Please try again.');
+    }
+});
+
+// Handle form submission
+document.getElementById('profileForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    
+    const profileData = {
+        name: document.getElementById('name').value,
+        phone: document.getElementById('phone').value,
+        occupation: document.getElementById('occupation').value,
+        company: document.getElementById('company').value,
+        graduationYear: document.getElementById('graduationYear').value
+    };
+
+    try {
+        const response = await fetch('/api/alumni/me', {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(profileData),
+            credentials: 'include' // Important for session cookies
+        });
+        
+        if (response.status === 401) {
+            window.location.href = '/alumniLogin.html';
+            return;
+        }
+        
+        if (!response.ok) {
+            throw new Error('Failed to update profile');
+        }
+        
+        alert('Profile updated successfully!');
+    } catch (error) {
+        console.error('Error updating profile:', error);
+        alert('Failed to update profile. Please try again.');
+    }
+});
+    </script>
+</body>
+</html>

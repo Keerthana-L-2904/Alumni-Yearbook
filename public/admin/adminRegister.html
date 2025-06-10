@@ -1,0 +1,63 @@
+<!-- register.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Register</title>
+  <link href="../css/login.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+  <div class="container">
+    <h2>Register to Your Admin Profile</h2>
+    <form id="admin-register-form">
+      <label for="name">Name:</label>
+      <input type="text" id="name" name="name" required>
+      <label for="phone">Phone-no:</label>
+      <input type="text" id="phone" name="phone" required>
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email" required>
+
+      <label for="password">Password:</label>
+      <input type="password" id="password" name="password" required>
+
+      <input type="submit" value="Register Profile">
+    </form>
+  
+  </div>
+  <script>
+    const form = document.getElementById('admin-register-form');
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const data = {
+        name: form.name.value.trim(),
+        phone: form.phone.value.trim(),
+        email: form.email.value.trim(),
+        password: form.password.value
+      };
+
+      try {
+        const response = await fetch('http://localhost:5000/api/admin/register', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data)
+        });
+
+        const result = await response.json();
+
+        if (response.ok) {
+          alert('Registration successful! Redirecting to homepage...');
+          form.reset();
+          window.location.href = '../index.html'; // redirect on success
+        } else {
+          alert('Registration failed: ' + result.message);
+        }
+      } catch (error) {
+        alert('Server error: ' + error.message);
+      }
+    });
+</script>
+
+</body>
+</html>
